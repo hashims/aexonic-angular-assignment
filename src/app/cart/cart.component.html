@@ -1,0 +1,32 @@
+<div>
+    <div class="container">
+        <h2 class="text-center my-5">Cart</h2>
+        <div class="card w-75" *ngIf="cartItems.length > 0 else noproduct">
+            <div class="card-body">
+                <h5 class="card-title">Gross Amount: {{ finalPrice.sum }} </h5>
+                <p class="card-text">Discount Availed: {{ finalPrice.discount }} </p>
+                <p class="card-text">Final Amount: {{ finalPrice.sum - finalPrice.discount }} </p>
+            </div>
+        </div>
+
+        <ng-template #noproduct>
+            <h4>Please add products to cart...</h4>
+        </ng-template>
+
+        <div class="row">
+            <div class="col-md-3 my-3" *ngFor="let product of cartItems">
+                <div class="card h-100">
+                    <img src="/assets/pexels-gabriel-freytez-341523.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-title">Id: {{product.id}}</p>
+                        <p class="card-text">Product: {{product.item_name}}</p>
+                        <p class="card-text fw-bold">Price: ${{product.price}}</p>
+                        <p class="card-text">Total Products: {{product.quantity}}</p>
+                        <p>Amount: {{ product.price * product.quantity}} </p>
+                        <button class="btn btn-primary" (click)="removeFromCart(product.id)">Remove from Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
